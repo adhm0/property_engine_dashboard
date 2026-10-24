@@ -9,34 +9,23 @@ class BookableUnitTypeSeeder extends Seeder
 {
     public function run(): void
     {
-        BookableUnitType::create([
-            'code' => 'single_room',
-            'is_active' => true,
-        ]);
+        $unitTypes = [
+            'single_room',
+            'double_room',
+            'suite',
+            'apartment_unit',
+            'chalet_unit',
+            'hall_section',
+            'panoramic_penthouse',
+            'majlis',
+            'conference_hall',
+        ];
 
-        BookableUnitType::create([
-            'code' => 'double_room',
-            'is_active' => true,
-        ]);
-
-        BookableUnitType::create([
-            'code' => 'suite',
-            'is_active' => true,
-        ]);
-
-        BookableUnitType::create([
-            'code' => 'apartment_unit',
-            'is_active' => true,
-        ]);
-
-        BookableUnitType::create([
-            'code' => 'chalet_unit',
-            'is_active' => true,
-        ]);
-
-        BookableUnitType::create([
-            'code' => 'hall_section',
-            'is_active' => true,
-        ]);
+        foreach ($unitTypes as $code) {
+            BookableUnitType::updateOrCreate(
+                ['code' => $code],
+                ['is_active' => true],
+            );
+        }
     }
 }

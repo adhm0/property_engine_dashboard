@@ -9,48 +9,36 @@ class AttributeGroupSeeder extends Seeder
 {
     public function run(): void
     {
-        AttributeGroup::create([
-            'code' => 'basic',
-            'icon' => 'home',
-            'display_order' => 0,
-            'is_active' => true,
-            'translations_data' => [
-                'ar' => ['code' => 'أساسي'],
-                'en' => ['code' => 'Basic'],
-            ],
-        ]);
+        $groups = [
+            ['basic', 'home', 0, 'الأساسيات', 'Basic'],
+            ['amenities', 'star', 1, 'المرافق', 'Amenities'],
+            ['media', 'tv', 2, 'الترفيه والإعلام', 'Media & Entertainment'],
+            ['bathroom', 'bath', 3, 'الحمام', 'Bathroom'],
+            ['kitchen', 'fire', 4, 'المطبخ والطعام', 'Kitchen & Dining'],
+            ['outdoor', 'sun', 5, 'المساحات الخارجية', 'Outdoor'],
+            ['events', 'sparkles', 6, 'الفعاليات والمناسبات', 'Events & Weddings'],
+            ['conference', 'presentation', 7, 'المؤتمرات والاجتماعات', 'Conferences & Meetings'],
+            ['services', 'bell', 8, 'الخدمات', 'Services'],
+            ['safety', 'shield', 9, 'السلامة والأمان', 'Safety & Security'],
+            ['accessibility', 'accessible', 10, 'إمكانية الوصول', 'Accessibility'],
+            ['parking', 'car', 11, 'المواقف والتنقل', 'Parking & Transport'],
+            ['rules', 'gavel', 12, 'القواعد', 'Rules'],
+            ['pricing', 'cash', 13, 'التسعير', 'Pricing'],
+        ];
 
-        AttributeGroup::create([
-            'code' => 'amenities',
-            'icon' => 'star',
-            'display_order' => 1,
-            'is_active' => true,
-            'translations_data' => [
-                'ar' => ['code' => 'وسائل الراحة'],
-                'en' => ['code' => 'Amenities'],
-            ],
-        ]);
-
-        AttributeGroup::create([
-            'code' => 'rules',
-            'icon' => 'gavel',
-            'display_order' => 2,
-            'is_active' => true,
-            'translations_data' => [
-                'ar' => ['code' => 'القواعد'],
-                'en' => ['code' => 'Rules'],
-            ],
-        ]);
-
-        AttributeGroup::create([
-            'code' => 'pricing',
-            'icon' => 'cash',
-            'display_order' => 3,
-            'is_active' => true,
-            'translations_data' => [
-                'ar' => ['code' => 'التسعير'],
-                'en' => ['code' => 'Pricing'],
-            ],
-        ]);
+        foreach ($groups as [$code, $icon, $displayOrder, $nameAr, $nameEn]) {
+            AttributeGroup::updateOrCreate(
+                ['code' => $code],
+                [
+                    'icon' => $icon,
+                    'display_order' => $displayOrder,
+                    'is_active' => true,
+                    'translations_data' => [
+                        'ar' => ['code' => $nameAr],
+                        'en' => ['code' => $nameEn],
+                    ],
+                ],
+            );
+        }
     }
 }

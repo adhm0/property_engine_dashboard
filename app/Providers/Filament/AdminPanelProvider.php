@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('محرك العقارات')
+            ->font('Tajawal')
             ->colors([
                 'primary' => Color::Emerald,
                 'gray' => Color::Slate,
