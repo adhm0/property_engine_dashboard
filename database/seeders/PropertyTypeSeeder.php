@@ -9,24 +9,24 @@ class PropertyTypeSeeder extends Seeder
 {
     public function run(): void
     {
-        PropertyType::create([
-            'code' => 'hotel',
-            'is_active' => true,
-        ]);
+        PropertyType::updateOrCreate(
+            ['code' => 'hotel'],
+            ['is_active' => true],
+        );
 
-        PropertyType::create([
-            'code' => 'apartment',
-            'is_active' => true,
-        ]);
+        PropertyType::updateOrCreate(
+            ['code' => 'apartment'],
+            ['is_active' => true],
+        );
 
-        PropertyType::create([
-            'code' => 'chalet',
-            'is_active' => true,
-        ]);
+        PropertyType::updateOrCreate(
+            ['code' => 'chalet'],
+            ['is_active' => true],
+        );
 
-        PropertyType::create([
-            'code' => 'hall',
-            'is_active' => true,
-        ]);
+        PropertyType::updateOrCreate(
+            ['code' => 'hall'],
+            ['is_active' => true],
+        );
     }
 }

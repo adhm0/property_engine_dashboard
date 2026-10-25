@@ -10,48 +10,52 @@ class CitySeeder extends Seeder
 {
     public function run(): void
     {
-        $saudiArabia = Country::where('code', 'SA')->first();
-        $uae = Country::where('code', 'AE')->first();
-        $yemen = Country::where('code', 'YE')->first();
+        $saudiArabia = Country::where('code', 'SA')->firstOrFail();
+        $uae = Country::where('code', 'AE')->firstOrFail();
+        $yemen = Country::where('code', 'YE')->firstOrFail();
 
-        City::create([
-            'country_id' => $saudiArabia->id,
-            'slug' => 'riyadh',
-            'name' => 'Riyadh',
-            'translations_data' => [
-                'ar' => ['name' => 'الرياض'],
-                'en' => ['name' => 'Riyadh'],
+        City::updateOrCreate(
+            ['country_id' => $saudiArabia->id, 'slug' => 'riyadh'],
+            [
+                'name' => 'Riyadh',
+                'translations_data' => [
+                    'ar' => ['name' => 'الرياض'],
+                    'en' => ['name' => 'Riyadh'],
+                ],
             ],
-        ]);
+        );
 
-        City::create([
-            'country_id' => $saudiArabia->id,
-            'slug' => 'jeddah',
-            'name' => 'Jeddah',
-            'translations_data' => [
-                'ar' => ['name' => 'جدة'],
-                'en' => ['name' => 'Jeddah'],
+        City::updateOrCreate(
+            ['country_id' => $saudiArabia->id, 'slug' => 'jeddah'],
+            [
+                'name' => 'Jeddah',
+                'translations_data' => [
+                    'ar' => ['name' => 'جدة'],
+                    'en' => ['name' => 'Jeddah'],
+                ],
             ],
-        ]);
+        );
 
-        City::create([
-            'country_id' => $uae->id,
-            'slug' => 'dubai',
-            'name' => 'Dubai',
-            'translations_data' => [
-                'ar' => ['name' => 'دبي'],
-                'en' => ['name' => 'Dubai'],
+        City::updateOrCreate(
+            ['country_id' => $uae->id, 'slug' => 'dubai'],
+            [
+                'name' => 'Dubai',
+                'translations_data' => [
+                    'ar' => ['name' => 'دبي'],
+                    'en' => ['name' => 'Dubai'],
+                ],
             ],
-        ]);
+        );
 
-        City::create([
-            'country_id' => $yemen->id,
-            'slug' => 'sanaa',
-            'name' => 'Sanaa',
-            'translations_data' => [
-                'ar' => ['name' => 'صنعاء'],
-                'en' => ['name' => 'Sanaa'],
+        City::updateOrCreate(
+            ['country_id' => $yemen->id, 'slug' => 'sanaa'],
+            [
+                'name' => 'Sanaa',
+                'translations_data' => [
+                    'ar' => ['name' => 'صنعاء'],
+                    'en' => ['name' => 'Sanaa'],
+                ],
             ],
-        ]);
+        );
     }
 }
