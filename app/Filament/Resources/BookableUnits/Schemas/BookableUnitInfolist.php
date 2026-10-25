@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\BookableUnits\Schemas;
 
+use App\Models\BookableUnit;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -46,15 +47,21 @@ class BookableUnitInfolist
                         TextEntry::make('filter_attributes')
                             ->label('بيانات الفلترة')
                             ->placeholder('-')
-                            ->formatStateUsing(fn (?array $state): ?string => filled($state)
-                                ? collect($state)
+                            ->getStateUsing(function (BookableUnit $record): ?string {
+                                $filters = $record->filter_attributes;
+
+                                if (! is_array($filters) || blank($filters)) {
+                                    return null;
+                                }
+
+                                return collect($filters)
                                     ->map(fn ($value, $key): string => $key.': '.match (true) {
                                         is_bool($value) => $value ? 'نعم' : 'لا',
-                                        is_array($value) => json_encode($value, JSON_UNESCAPED_UNICODE),
+                                        is_array($value) => json_encode($value, JSON_UNESCAPED_UNICODE) ?: '',
                                         default => (string) $value,
                                     })
-                                    ->implode(' | ')
-                                : null)
+                                    ->implode(' | ');
+                            })
                             ->columnSpanFull(),
                         TextEntry::make('created_at')
                             ->label('تاريخ الإنشاء')

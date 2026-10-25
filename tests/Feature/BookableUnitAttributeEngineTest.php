@@ -197,6 +197,19 @@ class BookableUnitAttributeEngineTest extends TestCase
         $this->get('/admin/bookable-unit-attribute-values/create')->assertSuccessful();
     }
 
+    public function test_bookable_unit_view_page_renders_filter_attributes(): void
+    {
+        $unit = $this->makeUnit();
+
+        [$area] = $this->makeAttributes($unit->unit_type_id);
+
+        $unit->syncAttributeValues([
+            $area->id => ['value_number' => 70],
+        ]);
+
+        $this->get("/admin/bookable-units/{$unit->id}")->assertSuccessful();
+    }
+
     protected function makeUnit(bool $createUnit = true): BookableUnit
     {
         $property = $this->makeProperty();
